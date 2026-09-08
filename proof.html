@@ -231,13 +231,25 @@
 
         .star-select {
             display: flex;
-            gap: 12px;
+            flex-wrap: wrap;
+            gap: 12px 18px;
             margin-bottom: 15px;
+            align-items: center;
         }
 
         .star-option {
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #e6a100;
+            font-weight: bold;
+        }
+
+        .star-option input[type="radio"] {
+            accent-color: var(--espresso);
+            cursor: pointer;
         }
 
         .submit-btn {
@@ -344,9 +356,9 @@
             <div class="star-select">
                 <label class="star-option"><input type="radio" name="rating" value="5" checked> ★★★★★ (5)</label>
                 <label class="star-option"><input type="radio" name="rating" value="4"> ★★★★ (4)</label>
-                <label class="star-option"><input type="radio" name="rating" value="3"> ★★★ (3)</label><br></br>
-                <label class="star-option"><input type="radio" name="rating" value="3"> ★★ (2)</label>
-                <label class="star-option"><input type="radio" name="rating" value="3"> ★ (1)</label>
+                <label class="star-option"><input type="radio" name="rating" value="3"> ★★★ (3)</label>
+                <label class="star-option"><input type="radio" name="rating" value="2"> ★★ (2)</label>
+                <label class="star-option"><input type="radio" name="rating" value="1"> ★ (1)</label>
             </div>
 
             <div class="form-group">
