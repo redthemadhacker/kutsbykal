@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/jpeg" href="kal.jpeg">
+    <title>The Proof is in the Stitch🪡</title>
+    <style>
+
+        :root {
+            --bg-cream: #f6f0ea;
+            --espresso: #2b2523;
+            --gold: #cba36b;
+            --dusty-rose: #d19a93;
+            --card-bg: rgba(246, 240, 234, 0.92);
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Georgia', 'Poppins', serif;
+            background-image: url('YOUR_BACKGROUND_IMAGE_URL_HERE.jpg');
+            background-color: var(--bg-cream);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--espresso);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .button-box {
+            background: var(--card-bg);
+            color: var(--espresso);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 1.5px solid var(--gold);
+            box-shadow: none !important;
+            text-shadow: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .button-box:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .page-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 25px;
+            border: 2px dashed var(--gold);
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(43, 37, 35, 0.12);
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1rem;
+            color: #5a4f4b;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .transform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .transform-card {
+            position: relative;
+            height: 250px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .transform-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease, opacity 0.5s ease;
+        }
+
+        .img-before {
+            z-index: 2;
+        }
+        
+        .img-after {
+            z-index: 1;
+        }
+
+        .transform-card.revealed .img-before {
+            opacity: 0;
+            transform: scale(1.15) rotate(2deg);
+            filter: blur(4px);
+        }
+
+        .transform-card.revealed .img-after {
+            transform: scale(1.05);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            background: rgba(43, 37, 35, 0.85);
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            pointer-events: none;
+            transition: background 0.3s ease;
+            border: 1px solid var(--gold);
+        }
+
+        .transform-card.revealed .status-badge {
+            background: rgba(209, 154, 147, 0.95);
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 1.6rem;
+            margin: 35px 0 20px 0;
+            border-top: 1px solid var(--gold);
+            padding-top: 25px;
+            font-weight: normal;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .review-card {
+            background: #ffffff;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 1px solid var(--gold);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .star-rating {
+            color: #e6a100;
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #4a403c;
+            line-height: 1.5;
+        }
+
+        .review-form {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 18px;
+            border: 1.5px solid var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--gold);
+            font-family: inherit;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .star-select {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .star-option {
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--espresso);
+            color: var(--bg-cream);
+            padding: 12px;
+            border-radius: 20px;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+            .transform-card {
+                height: 180px;
+            }
+            .page-container {
+                padding: 20px;
+            }
+            .page-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-container">
+        <a href="index.html" class="button-box">Kal's Kutting Board✂️</a>
+        <a href="behind.html" class="button-box">Behind the Kuts🎬</a>
+        <a href="deal.html" class="button-box">Kut Me a Deal🤝</a>
+    </nav>
+
+    <main class="page-container">
+        <h1 class="page-title">The Proof is in the Stitch🪡</h1>
+        <p class="subtitle">Tap any photo to transform it and see the final result!</p>
+
+        <div class="transform-grid">
+            
+            <div class="transform-card" onclick="toggleTransform(this)">
+                <img src="before1.jpeg" alt="Before" class="transform-img img-before">
+                <img src="after1.jpeg" alt="After" class="transform-img img-after">
+                <span class="status-badge">Tap to Reveal✨</span>
+            </div>
+
+            <div class="transform-card" onclick="toggleTransform(this)">
+                <img src="before2.jpeg" alt="Before" class="transform-img img-before">
+                <img src="after2.jpeg" alt="After" class="transform-img img-after">
+                <span class="status-badge">Tap to Reveal✨</span>
+            </div>
+
+            <div class="transform-card" onclick="toggleTransform(this)">
+                <img src="before3.jpeg" alt="Before" class="transform-img img-before">
+                <img src="after3.jpeg" alt="After" class="transform-img img-after">
+                <span class="status-badge">Tap to Reveal✨</span>
+            </div>
+
+            <div class="transform-card" onclick="toggleTransform(this)">
+                <img src="before4.jpeg" alt="Before" class="transform-img img-before">
+                <img src="after4.jpeg" alt="After" class="transform-img img-after">
+                <span class="status-badge">Tap to Reveal✨</span>
+            </div>
+
+        </div>
+
+        <h2 class="section-heading">Kal’s Love Notes💬</h2>
+        <div class="reviews-list">
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="reviewer-name">Maya R.</span>
+                    <span class="star-rating">★★★★★</span>
+                </div>
+                <p class="review-text">Kal transformed a vintage dress that was way too big into my absolute favorite outfit! High-quality work and super fast turnaround.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="reviewer-name">Jordan T.</span>
+                    <span class="star-rating">★★★★★</span>
+                </div>
+                <p class="review-text">The tapering on my denim jacket was 10/10. Exactly what I wanted!</p>
+            </div>
+
+        </div>
+
+        <h2 class="section-heading">Write a Note✨</h2>
+        <form class="review-form" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID" method="POST">
+            
+            <div class="form-group">
+                <label for="review-name">Your Name</label>
+                <input type="text" id="review-name" name="reviewer_name" class="form-input" required placeholder="Name or Nickname">
+            </div>
+
+            <label>Your Rating</label>
+            <div class="star-select">
+                <label class="star-option"><input type="radio" name="rating" value="5" checked> ★★★★★ (5)</label>
+                <label class="star-option"><input type="radio" name="rating" value="4"> ★★★★ (4)</label>
+                <label class="star-option"><input type="radio" name="rating" value="3"> ★★★ (3)</label>
+                <label class="star-option"><input type="radio" name="rating" value="3"> ★★ (2)</label>
+                <label class="star-option"><input type="radio" name="rating" value="3"> ★ (1)</label>
+            </div>
+
+            <div class="form-group">
+                <label for="review-msg">Your Review</label>
+                <textarea id="review-msg" name="review_message" class="form-textarea" required placeholder="How did Kal do with your fits?"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send your Love💖</button>
+        </form>
+    </main>
+
+    <script>
+        function toggleTransform(card) {
+            card.classList.toggle('revealed');
+            const badge = card.querySelector('.status-badge');
+            if (card.classList.contains('revealed')) {
+                badge.innerText = 'The Result! ✨';
+            } else {
+                badge.innerText = 'Tap to Reveal ✨';
+            }
+        }
+    </script>
+
+</body>
+</html>

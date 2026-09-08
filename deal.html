@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/jpeg" href="kal.jpeg">
+    <title>Kut Me a Deal🤝</title>
+    <style>
+
+        :root {
+            --bg-cream: #f6f0ea;
+            --espresso: #2b2523;
+            --gold: #cba36b;
+            --dusty-rose: #d19a93;
+            --card-bg: rgba(246, 240, 234, 0.92);
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Georgia', 'Poppins', serif;
+            background-image: url('YOUR_BACKGROUND_IMAGE_URL_HERE.jpg');
+            background-color: var(--bg-cream);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--espresso);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .button-box {
+            background: var(--card-bg);
+            color: var(--espresso);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 1.5px solid var(--gold);
+            box-shadow: none !important;
+            text-shadow: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .button-box:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .page-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 25px;
+            border: 2px dashed var(--gold);
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(43, 37, 35, 0.12);
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+
+        .catchy-subtitle {
+            text-align: center;
+            font-size: 1.05rem;
+            color: #5a4f4b;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1.5px solid var(--gold);
+            background: #ffffff;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--dusty-rose);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .photo-upload-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .upload-slot {
+            position: relative;
+            height: 120px;
+            border: 2px dashed var(--gold);
+            border-radius: 16px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .upload-slot:hover {
+            background: #fcf8f5;
+            border-color: var(--dusty-rose);
+        }
+
+        .plus-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 300;
+            line-height: 1;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+
+        .upload-slot:hover .plus-icon {
+            color: var(--dusty-rose);
+        }
+
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--espresso);
+            color: var(--bg-cream);
+            padding: 14px;
+            border-radius: 25px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .page-container {
+                padding: 20px;
+            }
+            .page-title {
+                font-size: 1.75rem;
+            }
+            .upload-slot {
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-container">
+        <a href="index.html" class="button-box">Kal's Kutting Board✂️</a>
+        <a href="behind.html" class="button-box">Behind the Kuts🎬</a>
+        <a href="proof.html" class="button-box">The Proof is in the Stitch🪡</a>
+    </nav>
+
+    <main class="page-container">
+        <h1 class="page-title">Kut Me a Deal🤝</h1>
+        <p class="catchy-subtitle">Got a garment that needs Kal's touch? Fill this out to find out how much!</p>
+
+        <form action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID" method="POST" enctype="multipart/form-data">
+            
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" class="form-input" required placeholder="Who is Kal stitching for?">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your Email Address</label>
+                <input type="email" id="email" name="email" class="form-input" required placeholder="Where should Kal send the estimate?">
+            </div>
+
+            <div class="form-group">
+                <label for="items">Garment / Item(s)</label>
+                <input type="text" id="items" name="items" class="form-input" required placeholder="e.g., Denim Jacket, Evening Dress, Pants">
+            </div>
+
+            <div class="form-group">
+                <label for="alterations">Alterations Requested</label>
+                <input type="text" id="alterations" name="alterations" class="form-input" required placeholder="e.g., Hemming, Tapering, Custom Patchwork">
+            </div>
+
+            <div class="form-group">
+                <label for="details">Other Details / Special Requests</label>
+                <textarea id="details" name="details" class="form-textarea" placeholder="Any specific visions, deadlines, or other important details..."></textarea>
+            </div>
+
+            <span class="photo-upload-title">Upload Photos (Optional)</span>
+            <div class="upload-grid">
+                
+                <div class="upload-slot">
+                    <span class="plus-icon">+</span>
+                    <input type="file" name="photo_1" accept="image/*" class="file-input">
+                </div>
+
+                <div class="upload-slot">
+                    <span class="plus-icon">+</span>
+                    <input type="file" name="photo_2" accept="image/*" class="file-input">
+                </div>
+
+                <div class="upload-slot">
+                    <span class="plus-icon">+</span>
+                    <input type="file" name="photo_3" accept="image/*" class="file-input">
+                </div>
+
+                <div class="upload-slot">
+                    <span class="plus-icon">+</span>
+                    <input type="file" name="photo_4" accept="image/*" class="file-input">
+                </div>
+
+            </div>
+
+            <button type="submit" class="submit-btn">Kut my Deal✨</button>
+
+        </form>
+    </main>
+
+</body>
+</html>

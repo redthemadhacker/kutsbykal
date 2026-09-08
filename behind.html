@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" src="kal.jpeg">
+    <title>Behind the Kuts🎬</title>
+    <style>
+        :root {
+            --bg-cream: #f6f0ea;
+            --espresso: #2b2523;
+            --gold: #cba36b;
+            --dusty-rose: #d19a93;
+            --card-bg: rgba(246, 240, 234, 0.92);
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Georgia', 'Poppins', serif;
+            background-image: url('YOUR_BACKGROUND_IMAGE_URL_HERE.jpg');
+            background-color: var(--bg-cream);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--espresso);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .button-box {
+            background: var(--card-bg);
+            color: var(--espresso);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 1.5px solid var(--gold);
+            box-shadow: none !important;
+            text-shadow: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .button-box:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .page-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 25px;
+            border: 2px dashed var(--gold);
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(43, 37, 35, 0.12);
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-weight: normal;
+        }
+
+        .media-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .pfp-box, .video-box {
+            flex: 1;
+            height: 380px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .pfp-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-box iframe, .video-box video {
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+
+        .bio-section {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .bio-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--espresso);
+        }
+
+        .bio-section p {
+            line-height: 1.7;
+            font-size: 1.05rem;
+            color: #4a403c;
+        }
+
+        .socials-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-top: 1px solid var(--gold);
+            padding-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: #ffffff;
+            color: var(--espresso);
+            text-decoration: none;
+            border-radius: 20px;
+            border: 1px solid var(--gold);
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            background: var(--bg-cream);
+        }
+
+        @media (max-width: 700px) {
+            .media-container {
+                flex-direction: column;
+            }
+            .pfp-box, .video-box {
+                width: 100%;
+                height: 300px;
+            }
+            .page-container {
+                padding: 20px;
+            }
+            .page-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-container">
+        <a href="index.html" class="button-box">Kal's Kutting Board✂️</a>
+        <a href="deal.html" class="button-box">Kut Me a Deal🤝</a>
+        <a href="proof.html" class="button-box">The Proof is in the Stitch🪡</a>
+    </nav>
+
+    <main class="page-container">
+        <h1 class="page-title">Behind the Kuts🎬</h1>
+
+        <div class="media-container">
+            <div class="pfp-box">
+                <img src="kal.jpeg" alt="Kaili Lugtu - Owner/Operator">
+            </div>
+            <div class="video-box">
+                <video controls poster="video-thumbnail.jpg">
+                <source src="insta.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                </video>
+
+        <section class="bio-section">
+            <h2>The Girl Behind the Machine🧵</h2>
+            <p>
+            Meet Kal—your go-to plug for custom sewing, precision tailoring, and handmade ties. Kal crafts for the garments 
+            that need to fit better, last longer, or simply need a little extra personality. From quick alterations and mending 
+            to one-off custom pieces designed from scratch, every project is cut with intention, stitched by hand, and made 
+            to be worn.
+            </p>
+        </section>
+
+        <footer class="socials-container">
+            <a href="https://www.instagram.com/kutbykal?stkn=aGFhMThiNHNpMDVz" target="_blank" class="social-link">
+                📸 Instagram
+            </a>
+            <a href="https://depop.com" target="_blank" class="social-link">
+                🛍️ Depop Shop
+            </a>
+        </footer>
+    </main>
+
+</body>
+</html>
