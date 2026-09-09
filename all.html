@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/jpeg" href="kal.jpeg">
+    <title>Kustom Kollection✨</title>
+    <style>
+        :root {
+            --bg-cream: #f4ece1;
+            --espresso: #1e1816;
+            --gold: #d4af37;
+            --champagne-gold: #f3e5ab;
+            --dusty-rose: #c88880;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --dark-overlay: rgba(30, 24, 22, 0.85);
+        }
+
+        body {
+            margin: 0;
+            padding: 25px;
+            font-family: 'Georgia', 'Poppins', serif;
+            background-image: url('https://i.pinimg.com/736x/8f/f9/ca/8ff9ca24be0fec1bca083d7282a454aa.jpg');
+            background-color: var(--bg-cream);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--espresso);
+        }
+
+        .hub-banner {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            background: var(--dark-overlay);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(30, 24, 22, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .button-box {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--espresso);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: 1px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .button-box:hover {
+            background: var(--gold);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .header-title {
+            color: var(--champagne-gold);
+            margin: 0 0 10px 0;
+            font-size: 2.8rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-family: 'Georgia', serif;
+        }
+
+        .instruction-banner {
+            color: #f6f0ea;
+            font-size: 1rem;
+            font-style: italic;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .category-filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--dark-overlay);
+            color: var(--champagne-gold);
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            border: 1.5px solid var(--gold);
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .filter-btn:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+            border-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .filter-btn.active {
+            background: var(--gold);
+            color: var(--espresso);
+            border-color: #ffffff;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .master-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 22px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background-color: var(--card-bg);
+            border: 3px solid var(--gold);
+            border-radius: 20px; 
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            position: relative;
+            box-shadow: 0 8px 22px rgba(30, 24, 22, 0.2);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .grid-item:hover {
+            transform: translateY(-8px) scale(1.03);
+            border-color: var(--dusty-rose);
+            box-shadow: 0 15px 35px rgba(30, 24, 22, 0.35);
+            z-index: 10;
+        }
+
+        .grid-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .grid-item:hover .grid-preview-img {
+            transform: scale(1.08);
+        }
+
+        .badge-count {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: var(--espresso);
+            color: var(--champagne-gold);
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 4px 9px;
+            border-radius: 12px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(30, 24, 22, 0.85);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--bg-cream);
+            padding: 30px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 750px;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            grid-template-rows: repeat(3, 100px);
+            gap: 15px;
+            position: relative;
+            border: 3px solid var(--gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1.5px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .modal-main-img {
+            grid-column: 1 / 2;
+            grid-row: 1 / 4;
+        }
+
+        .modal-sub-img-1 {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .modal-sub-img-2 {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: var(--champagne-gold);
+            background: var(--dark-overlay);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+            border-color: #ffffff;
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 1024px) {
+            .master-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .modal-content {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(2, 130px);
+            }
+            .modal-main-img {
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
+            }
+            .modal-sub-img-1 { grid-column: 2 / 3; grid-row: 1 / 2; }
+            .modal-sub-img-2 { grid-column: 1 / 2; grid-row: 2 / 3; }
+        }
+
+        @media (max-width: 600px) {
+            .master-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .header-title {
+                font-size: 2rem;
+            }
+            .hub-banner {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hub-banner">
+        <nav class="nav-container">
+            <a href="index.html" class="button-box">Kal's Kutting Board✂️</a>
+            <a href="behind.html" class="button-box">Behind the Kuts🎬</a>
+            <a href="deal.html" class="button-box">Kut Me a Deal🤝</a>
+            <a href="proof.html" class="button-box">The Proof is in the Stitch🪡</a>
+        </nav>
+        <h1 class="header-title">Kustom Kollection✨</h1>
+        <p class="instruction-banner">✨Step into the kollection — browse by specialty and klick any piece to reveal all 4 angles of the kreation.✨
+</p>
+    </div>
+
+    <div class="category-filter-container">
+        <button class="filter-btn active" onclick="filterGallery('all')">Show All Hub (100)</button>
+        <button class="filter-btn" onclick="filterGallery('kustom')">Kustom Kreations 🎨</button>
+        <button class="filter-btn" onclick="filterGallery('tailors')">Tailors 📐</button>
+        <button class="filter-btn" onclick="filterGallery('alterations')">Alterations 🪡</button>
+        <button class="filter-btn" onclick="filterGallery('upcycling')">Kustom Rekuts ♻️</button>
+    </div>
+
+    <div class="master-grid" id="masterGrid"></div>
+
+    <div class="modal" id="imageModal">
+        <div class="modal-content" id="modalContent">
+            <button class="close-btn" id="closeBtn">&times;</button>
+        </div>
+    </div>
+
+    <script>
+        const allHubData = {
+            kustom: {
+                badge: '4 🎨',
+                items: {
+                    1:  { cover: "kustom1_cover.jpeg", sub1: "kustom1_angle1.jpeg", sub2: "kustom1_angle2.jpeg", sub3: "kustom1_angle3.jpeg" },
+                    2:  { cover: "kustom2_cover.jpeg", sub1: "kustom2_angle1.jpeg", sub2: "kustom2_angle2.jpeg", sub3: "kustom2_angle3.jpeg" },
+                    3:  { cover: "kustom3_cover.jpeg", sub1: "kustom3_angle1.jpeg", sub2: "kustom3_angle2.jpeg", sub3: "kustom3_angle3.jpeg" },
+                    4:  { cover: "kustom4_cover.jpeg", sub1: "kustom4_angle1.jpeg", sub2: "kustom4_angle2.jpeg", sub3: "kustom4_angle3.jpeg" },
+                    5:  { cover: "kustom5_cover.jpeg", sub1: "kustom5_angle1.jpeg", sub2: "kustom5_angle2.jpeg", sub3: "kustom5_angle3.jpeg" },
+                    6:  { cover: "kustom6_cover.jpeg", sub1: "kustom6_angle1.jpeg", sub2: "kustom6_angle2.jpeg", sub3: "kustom6_angle3.jpeg" },
+                    7:  { cover: "kustom7_cover.jpeg", sub1: "kustom7_angle1.jpeg", sub2: "kustom7_angle2.jpeg", sub3: "kustom7_angle3.jpeg" },
+                    8:  { cover: "kustom8_cover.jpeg", sub1: "kustom8_angle1.jpeg", sub2: "kustom8_angle2.jpeg", sub3: "kustom8_angle3.jpeg" },
+                    9:  { cover: "kustom9_cover.jpeg", sub1: "kustom9_angle1.jpeg", sub2: "kustom9_angle2.jpeg", sub3: "kustom9_angle3.jpeg" },
+                    10: { cover: "kustom10_cover.jpeg", sub1: "kustom10_angle1.jpeg", sub2: "kustom10_angle2.jpeg", sub3: "kustom10_angle3.jpeg" },
+                    11: { cover: "kustom11_cover.jpeg", sub1: "kustom11_angle1.jpeg", sub2: "kustom11_angle2.jpeg", sub3: "kustom11_angle3.jpeg" },
+                    12: { cover: "kustom12_cover.jpeg", sub1: "kustom12_angle1.jpeg", sub2: "kustom12_angle2.jpeg", sub3: "kustom12_angle3.jpeg" },
+                    13: { cover: "kustom13_cover.jpeg", sub1: "kustom13_angle1.jpeg", sub2: "kustom13_angle2.jpeg", sub3: "kustom13_angle3.jpeg" },
+                    14: { cover: "kustom14_cover.jpeg", sub1: "kustom14_angle1.jpeg", sub2: "kustom14_angle2.jpeg", sub3: "kustom14_angle3.jpeg" },
+                    15: { cover: "kustom15_cover.jpeg", sub1: "kustom15_angle1.jpeg", sub2: "kustom15_angle2.jpeg", sub3: "kustom15_angle3.jpeg" },
+                    16: { cover: "kustom16_cover.jpeg", sub1: "kustom16_angle1.jpeg", sub2: "kustom16_angle2.jpeg", sub3: "kustom16_angle3.jpeg" },
+                    17: { cover: "kustom17_cover.jpeg", sub1: "kustom17_angle1.jpeg", sub2: "kustom17_angle2.jpeg", sub3: "kustom17_angle3.jpeg" },
+                    18: { cover: "kustom18_cover.jpeg", sub1: "kustom18_angle1.jpeg", sub2: "kustom18_angle2.jpeg", sub3: "kustom18_angle3.jpeg" },
+                    19: { cover: "kustom19_cover.jpeg", sub1: "kustom19_angle1.jpeg", sub2: "kustom19_angle2.jpeg", sub3: "kustom19_angle3.jpeg" },
+                    20: { cover: "kustom20_cover.jpeg", sub1: "kustom20_angle1.jpeg", sub2: "kustom20_angle2.jpeg", sub3: "kustom20_angle3.jpeg" },
+                    21: { cover: "kustom21_cover.jpeg", sub1: "kustom21_angle1.jpeg", sub2: "kustom21_angle2.jpeg", sub3: "kustom21_angle3.jpeg" },
+                    22: { cover: "kustom22_cover.jpeg", sub1: "kustom22_angle1.jpeg", sub2: "kustom22_angle2.jpeg", sub3: "kustom22_angle3.jpeg" },
+                    23: { cover: "kustom23_cover.jpeg", sub1: "kustom23_angle1.jpeg", sub2: "kustom23_angle2.jpeg", sub3: "kustom23_angle3.jpeg" },
+                    24: { cover: "kustom24_cover.jpeg", sub1: "kustom24_angle1.jpeg", sub2: "kustom24_angle2.jpeg", sub3: "kustom24_angle3.jpeg" },
+                    25: { cover: "kustom25_cover.jpeg", sub1: "kustom25_angle1.jpeg", sub2: "kustom25_angle2.jpeg", sub3: "kustom25_angle3.jpeg" }
+                }
+            },
+            tailors: {
+                badge: '4 📐',
+                items: {
+                    1:  { cover: "tailors1_cover.jpeg", sub1: "tailors1_angle1.jpeg", sub2: "tailors1_angle2.jpeg", sub3: "tailors1_angle3.jpeg" },
+                    2:  { cover: "tailors2_cover.jpeg", sub1: "tailors2_angle1.jpeg", sub2: "tailors2_angle2.jpeg", sub3: "tailors2_angle3.jpeg" },
+                    3:  { cover: "tailors3_cover.jpeg", sub1: "tailors3_angle1.jpeg", sub2: "tailors3_angle2.jpeg", sub3: "tailors3_angle3.jpeg" },
+                    4:  { cover: "tailors4_cover.jpeg", sub1: "tailors4_angle1.jpeg", sub2: "tailors4_angle2.jpeg", sub3: "tailors4_angle3.jpeg" },
+                    5:  { cover: "tailors5_cover.jpeg", sub1: "tailors5_angle1.jpeg", sub2: "tailors5_angle2.jpeg", sub3: "tailors5_angle3.jpeg" },
+                    6:  { cover: "tailors6_cover.jpeg", sub1: "tailors6_angle1.jpeg", sub2: "tailors6_angle2.jpeg", sub3: "tailors6_angle3.jpeg" },
+                    7:  { cover: "tailors7_cover.jpeg", sub1: "tailors7_angle1.jpeg", sub2: "tailors7_angle2.jpeg", sub3: "tailors7_angle3.jpeg" },
+                    8:  { cover: "tailors8_cover.jpeg", sub1: "tailors8_angle1.jpeg", sub2: "tailors8_angle2.jpeg", sub3: "tailors8_angle3.jpeg" },
+                    9:  { cover: "tailors9_cover.jpeg", sub1: "tailors9_angle1.jpeg", sub2: "tailors9_angle2.jpeg", sub3: "tailors9_angle3.jpeg" },
+                    10: { cover: "tailors10_cover.jpeg", sub1: "tailors10_angle1.jpeg", sub2: "tailors10_angle2.jpeg", sub3: "tailors10_angle3.jpeg" },
+                    11: { cover: "tailors11_cover.jpeg", sub1: "tailors11_angle1.jpeg", sub2: "tailors11_angle2.jpeg", sub3: "tailors11_angle3.jpeg" },
+                    12: { cover: "tailors12_cover.jpeg", sub1: "tailors12_angle1.jpeg", sub2: "tailors12_angle2.jpeg", sub3: "tailors12_angle3.jpeg" },
+                    13: { cover: "tailors13_cover.jpeg", sub1: "tailors13_angle1.jpeg", sub2: "tailors13_angle2.jpeg", sub3: "tailors13_angle3.jpeg" },
+                    14: { cover: "tailors14_cover.jpeg", sub1: "tailors14_angle1.jpeg", sub2: "tailors14_angle2.jpeg", sub3: "tailors14_angle3.jpeg" },
+                    15: { cover: "tailors15_cover.jpeg", sub1: "tailors15_angle1.jpeg", sub2: "tailors15_angle2.jpeg", sub3: "tailors15_angle3.jpeg" },
+                    16: { cover: "tailors16_cover.jpeg", sub1: "tailors16_angle1.jpeg", sub2: "tailors16_angle2.jpeg", sub3: "tailors16_angle3.jpeg" },
+                    17: { cover: "tailors17_cover.jpeg", sub1: "tailors17_angle1.jpeg", sub2: "tailors17_angle2.jpeg", sub3: "tailors17_angle3.jpeg" },
+                    18: { cover: "tailors18_cover.jpeg", sub1: "tailors18_angle1.jpeg", sub2: "tailors18_angle2.jpeg", sub3: "tailors18_angle3.jpeg" },
+                    19: { cover: "tailors19_cover.jpeg", sub1: "tailors19_angle1.jpeg", sub2: "tailors19_angle2.jpeg", sub3: "tailors19_angle3.jpeg" },
+                    20: { cover: "tailors20_cover.jpeg", sub1: "tailors20_angle1.jpeg", sub2: "tailors20_angle2.jpeg", sub3: "tailors20_angle3.jpeg" },
+                    21: { cover: "tailors21_cover.jpeg", sub1: "tailors21_angle1.jpeg", sub2: "tailors21_angle2.jpeg", sub3: "tailors21_angle3.jpeg" },
+                    22: { cover: "tailors22_cover.jpeg", sub1: "tailors22_angle1.jpeg", sub2: "tailors22_angle2.jpeg", sub3: "tailors22_angle3.jpeg" },
+                    23: { cover: "tailors23_cover.jpeg", sub1: "tailors23_angle1.jpeg", sub2: "tailors23_angle2.jpeg", sub3: "tailors23_angle3.jpeg" },
+                    24: { cover: "tailors24_cover.jpeg", sub1: "tailors24_angle1.jpeg", sub2: "tailors24_angle2.jpeg", sub3: "tailors24_angle3.jpeg" },
+                    25: { cover: "tailors25_cover.jpeg", sub1: "tailors25_angle1.jpeg", sub2: "tailors25_angle2.jpeg", sub3: "tailors25_angle3.jpeg" }
+                }
+            },
+            alterations: {
+                badge: '4 🪡',
+                items: {
+                    1:  { cover: "alterations1_cover.jpeg", sub1: "alterations1_angle1.jpeg", sub2: "alterations1_angle2.jpeg", sub3: "alterations1_angle3.jpeg" },
+                    2:  { cover: "alterations2_cover.jpeg", sub1: "alterations2_angle1.jpeg", sub2: "alterations2_angle2.jpeg", sub3: "alterations2_angle3.jpeg" },
+                    3:  { cover: "alterations3_cover.jpeg", sub1: "alterations3_angle1.jpeg", sub2: "alterations3_angle2.jpeg", sub3: "alterations3_angle3.jpeg" },
+                    4:  { cover: "alterations4_cover.jpeg", sub1: "alterations4_angle1.jpeg", sub2: "alterations4_angle2.jpeg", sub3: "alterations4_angle3.jpeg" },
+                    5:  { cover: "alterations5_cover.jpeg", sub1: "alterations5_angle1.jpeg", sub2: "alterations5_angle2.jpeg", sub3: "alterations5_angle3.jpeg" },
+                    6:  { cover: "alterations6_cover.jpeg", sub1: "alterations6_angle1.jpeg", sub2: "alterations6_angle2.jpeg", sub3: "alterations6_angle3.jpeg" },
+                    7:  { cover: "alterations7_cover.jpeg", sub1: "alterations7_angle1.jpeg", sub2: "alterations7_angle2.jpeg", sub3: "alterations7_angle3.jpeg" },
+                    8:  { cover: "alterations8_cover.jpeg", sub1: "alterations8_angle1.jpeg", sub2: "alterations8_angle2.jpeg", sub3: "alterations8_angle3.jpeg" },
+                    9:  { cover: "alterations9_cover.jpeg", sub1: "alterations9_angle1.jpeg", sub2: "alterations9_angle2.jpeg", sub3: "alterations9_angle3.jpeg" },
+                    10: { cover: "alterations10_cover.jpeg", sub1: "alterations10_angle1.jpeg", sub2: "alterations10_angle2.jpeg", sub3: "alterations10_angle3.jpeg" },
+                    11: { cover: "alterations11_cover.jpeg", sub1: "alterations11_angle1.jpeg", sub2: "alterations11_angle2.jpeg", sub3: "alterations11_angle3.jpeg" },
+                    12: { cover: "alterations12_cover.jpeg", sub1: "alterations12_angle1.jpeg", sub2: "alterations12_angle2.jpeg", sub3: "alterations12_angle3.jpeg" },
+                    13: { cover: "alterations13_cover.jpeg", sub1: "alterations13_angle1.jpeg", sub2: "alterations13_angle2.jpeg", sub3: "alterations13_angle3.jpeg" },
+                    14: { cover: "alterations14_cover.jpeg", sub1: "alterations14_angle1.jpeg", sub2: "alterations14_angle2.jpeg", sub3: "alterations14_angle3.jpeg" },
+                    15: { cover: "alterations15_cover.jpeg", sub1: "alterations15_angle1.jpeg", sub2: "alterations15_angle2.jpeg", sub3: "alterations15_angle3.jpeg" },
+                    16: { cover: "alterations16_cover.jpeg", sub1: "alterations16_angle1.jpeg", sub2: "alterations16_angle2.jpeg", sub3: "alterations16_angle3.jpeg" },
+                    17: { cover: "alterations17_cover.jpeg", sub1: "alterations17_angle1.jpeg", sub2: "alterations17_angle2.jpeg", sub3: "alterations17_angle3.jpeg" },
+                    18: { cover: "alterations18_cover.jpeg", sub1: "alterations18_angle1.jpeg", sub2: "alterations18_angle2.jpeg", sub3: "alterations18_angle3.jpeg" },
+                    19: { cover: "alterations19_cover.jpeg", sub1: "alterations19_angle1.jpeg", sub2: "alterations19_angle2.jpeg", sub3: "alterations19_angle3.jpeg" },
+                    20: { cover: "alterations20_cover.jpeg", sub1: "alterations20_angle1.jpeg", sub2: "alterations20_angle2.jpeg", sub3: "alterations20_angle3.jpeg" },
+                    21: { cover: "alterations21_cover.jpeg", sub1: "alterations21_angle1.jpeg", sub2: "alterations21_angle2.jpeg", sub3: "alterations21_angle3.jpeg" },
+                    22: { cover: "alterations22_cover.jpeg", sub1: "alterations22_angle1.jpeg", sub2: "alterations22_angle2.jpeg", sub3: "alterations22_angle3.jpeg" },
+                    23: { cover: "alterations23_cover.jpeg", sub1: "alterations23_angle1.jpeg", sub2: "alterations23_angle2.jpeg", sub3: "alterations23_angle3.jpeg" },
+                    24: { cover: "alterations24_cover.jpeg", sub1: "alterations24_angle1.jpeg", sub2: "alterations24_angle2.jpeg", sub3: "alterations24_angle3.jpeg" },
+                    25: { cover: "alterations25_cover.jpeg", sub1: "alterations25_angle1.jpeg", sub2: "alterations25_angle2.jpeg", sub3: "alterations25_angle3.jpeg" }
+                }
+            },
+            upcycling: {
+                badge: '4 ♻️',
+                items: {
+                    1:  { cover: "upcycling1_cover.jpeg", sub1: "upcycling1_angle1.jpeg", sub2: "upcycling1_angle2.jpeg", sub3: "upcycling1_angle3.jpeg" },
+                    2:  { cover: "upcycling2_cover.jpeg", sub1: "upcycling2_angle1.jpeg", sub2: "upcycling2_angle2.jpeg", sub3: "upcycling2_angle3.jpeg" },
+                    3:  { cover: "upcycling3_cover.jpeg", sub1: "upcycling3_angle1.jpeg", sub2: "upcycling3_angle2.jpeg", sub3: "upcycling3_angle3.jpeg" },
+                    4:  { cover: "upcycling4_cover.jpeg", sub1: "upcycling4_angle1.jpeg", sub2: "upcycling4_angle2.jpeg", sub3: "upcycling4_angle3.jpeg" },
+                    5:  { cover: "upcycling5_cover.jpeg", sub1: "upcycling5_angle1.jpeg", sub2: "upcycling5_angle2.jpeg", sub3: "upcycling5_angle3.jpeg" },
+                    6:  { cover: "upcycling6_cover.jpeg", sub1: "upcycling6_angle1.jpeg", sub2: "upcycling6_angle2.jpeg", sub3: "upcycling6_angle3.jpeg" },
+                    7:  { cover: "upcycling7_cover.jpeg", sub1: "upcycling7_angle1.jpeg", sub2: "upcycling7_angle2.jpeg", sub3: "upcycling7_angle3.jpeg" },
+                    8:  { cover: "upcycling8_cover.jpeg", sub1: "upcycling8_angle1.jpeg", sub2: "upcycling8_angle2.jpeg", sub3: "upcycling8_angle3.jpeg" },
+                    9:  { cover: "upcycling9_cover.jpeg", sub1: "upcycling9_angle1.jpeg", sub2: "upcycling9_angle2.jpeg", sub3: "upcycling9_angle3.jpeg" },
+                    10: { cover: "upcycling10_cover.jpeg", sub1: "upcycling10_angle1.jpeg", sub2: "upcycling10_angle2.jpeg", sub3: "upcycling10_angle3.jpeg" },
+                    11: { cover: "upcycling11_cover.jpeg", sub1: "upcycling11_angle1.jpeg", sub2: "upcycling11_angle2.jpeg", sub3: "upcycling11_angle3.jpeg" },
+                    12: { cover: "upcycling12_cover.jpeg", sub1: "upcycling12_angle1.jpeg", sub2: "upcycling12_angle2.jpeg", sub3: "upcycling12_angle3.jpeg" },
+                    13: { cover: "upcycling13_cover.jpeg", sub1: "upcycling13_angle1.jpeg", sub2: "upcycling13_angle2.jpeg", sub3: "upcycling13_angle3.jpeg" },
+                    14: { cover: "upcycling14_cover.jpeg", sub1: "upcycling14_angle1.jpeg", sub2: "upcycling14_angle2.jpeg", sub3: "upcycling14_angle3.jpeg" },
+                    15: { cover: "upcycling15_cover.jpeg", sub1: "upcycling15_angle1.jpeg", sub2: "upcycling15_angle2.jpeg", sub3: "upcycling15_angle3.jpeg" },
+                    16: { cover: "upcycling16_cover.jpeg", sub1: "upcycling16_angle1.jpeg", sub2: "upcycling16_angle2.jpeg", sub3: "upcycling16_angle3.jpeg" },
+                    17: { cover: "upcycling17_cover.jpeg", sub1: "upcycling17_angle1.jpeg", sub2: "upcycling17_angle2.jpeg", sub3: "upcycling17_angle3.jpeg" },
+                    18: { cover: "upcycling18_cover.jpeg", sub1: "upcycling18_angle1.jpeg", sub2: "upcycling18_angle2.jpeg", sub3: "upcycling18_angle3.jpeg" },
+                    19: { cover: "upcycling19_cover.jpeg", sub1: "upcycling19_angle1.jpeg", sub2: "upcycling19_angle2.jpeg", sub3: "upcycling19_angle3.jpeg" },
+                    20: { cover: "upcycling20_cover.jpeg", sub1: "upcycling20_angle1.jpeg", sub2: "upcycling20_angle2.jpeg", sub3: "upcycling20_angle3.jpeg" },
+                    21: { cover: "upcycling21_cover.jpeg", sub1: "upcycling21_angle1.jpeg", sub2: "upcycling21_angle2.jpeg", sub3: "upcycling21_angle3.jpeg" },
+                    22: { cover: "upcycling22_cover.jpeg", sub1: "upcycling22_angle1.jpeg", sub2: "upcycling22_angle2.jpeg", sub3: "upcycling22_angle3.jpeg" },
+                    23: { cover: "upcycling23_cover.jpeg", sub1: "upcycling23_angle1.jpeg", sub2: "upcycling23_angle2.jpeg", sub3: "upcycling23_angle3.jpeg" },
+                    24: { cover: "upcycling24_cover.jpeg", sub1: "upcycling24_angle1.jpeg", sub2: "upcycling24_angle2.jpeg", sub3: "upcycling24_angle3.jpeg" },
+                    25: { cover: "upcycling25_cover.jpeg", sub1: "upcycling25_angle1.jpeg", sub2: "upcycling25_angle2.jpeg", sub3: "upcycling25_angle3.jpeg" }
+                }
+            }
+        };
+
+        const masterGrid = document.getElementById('masterGrid');
+        const modal = document.getElementById('imageModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeBtn = document.getElementById('closeBtn');
+
+        function renderGrid(filterCategory = 'all') {
+            masterGrid.innerHTML = '';
+            
+            Object.keys(allHubData).forEach(catKey => {
+                if (filterCategory === 'all' || filterCategory === catKey) {
+                    const catData = allHubData[catKey];
+                    
+                    Object.keys(catData.items).forEach(id => {
+                        const itemData = catData.items[id];
+                        const gridItem = document.createElement('div');
+                        gridItem.classList.add('grid-item');
+
+                        const previewImg = document.createElement('img');
+                        previewImg.src = itemData.cover;
+                        previewImg.alt = `${catKey} Piece ${id}`;
+                        previewImg.className = 'grid-preview-img';
+                        previewImg.onerror = () => { previewImg.src = 'tools.jpeg'; };
+                        gridItem.appendChild(previewImg);
+
+                        const badge = document.createElement('div');
+                        badge.className = 'badge-count';
+                        badge.textContent = catData.badge;
+                        gridItem.appendChild(badge);
+
+                        gridItem.addEventListener('click', () => {
+                            modalContent.innerHTML = '';
+                            modalContent.appendChild(closeBtn);
+
+                            const img1 = document.createElement('img');
+                            img1.src = itemData.cover;
+                            img1.className = 'modal-main-img';
+                            img1.onerror = () => { img1.src = 'tools.jpeg'; };
+
+                            const img2 = document.createElement('img');
+                            img2.src = itemData.sub1;
+                            img2.className = 'modal-sub-img-1';
+                            img2.onerror = () => { img2.src = 'tools.jpeg'; };
+
+                            const img3 = document.createElement('img');
+                            img3.src = itemData.sub2;
+                            img3.className = 'modal-sub-img-2';
+                            img3.onerror = () => { img3.src = 'tools.jpeg'; };
+
+                            const img4 = document.createElement('img');
+                            img4.src = itemData.sub3;
+                            img4.style.gridColumn = "2 / 3";
+                            img4.style.gridRow = "3 / 4";
+                            img4.onerror = () => { img4.src = 'tools.jpeg'; };
+
+                            modalContent.appendChild(img1);
+                            modalContent.appendChild(img2);
+                            modalContent.appendChild(img3);
+                            modalContent.appendChild(img4);
+
+                            modal.classList.add('active');
+                        });
+
+                        masterGrid.appendChild(gridItem);
+                    });
+                }
+            });
+        }
+
+        function filterGallery(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderGrid(category);
+        }
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        renderGrid('all');
+    </script>
+
+</body>
+</html>

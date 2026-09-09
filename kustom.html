@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/jpeg" href="kal.jpeg">
+    <title>Kustom Kreations🎨</title>
+    <style>
+        :root {
+            --bg-cream: #f6f0ea;
+            --espresso: #2b2523;
+            --gold: #cba36b;
+            --dusty-rose: #d19a93;
+            --card-bg: rgba(246, 240, 234, 0.92);
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Georgia', 'Poppins', serif;
+            background-image: url('https://i.pinimg.com/736x/8f/f9/ca/8ff9ca24be0fec1bca083d7282a454aa.jpg');
+            background-color: var(--bg-cream);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--espresso);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .button-box {
+            background: var(--card-bg);
+            color: var(--espresso);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 1.5px solid var(--gold);
+            box-shadow: none !important;
+            text-shadow: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .button-box:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .header-title {
+            text-align: center;
+            color: var(--espresso);
+            background: var(--card-bg);
+            display: table;
+            margin: 0 auto 15px auto;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 2.2rem;
+            font-weight: normal;
+            border: 2px dashed var(--gold);
+            box-shadow: 0 4px 15px rgba(43, 37, 35, 0.12);
+        }
+
+        .instruction-banner {
+            text-align: center;
+            color: var(--espresso);
+            background: var(--card-bg);
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            border: 1px solid var(--gold);
+            box-shadow: 0 2px 8px rgba(43, 37, 35, 0.08);
+            font-style: italic;
+        }
+
+        .master-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 18px;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background-color: var(--card-bg);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            position: relative;
+            box-shadow: 0 6px 18px rgba(43, 37, 35, 0.15);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.08) rotate(3deg);
+            border-color: var(--dusty-rose);
+            box-shadow: 0 10px 25px rgba(43, 37, 35, 0.25);
+            z-index: 10;
+        }
+
+        .grid-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .badge-count {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: var(--espresso);
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 3px 7px;
+            border-radius: 10px;
+            border: 1px solid var(--gold);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(43, 37, 35, 0.75);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--bg-cream);
+            padding: 25px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 700px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            grid-template-rows: repeat(3, 90px);
+            gap: 12px;
+            position: relative;
+            border: 2px solid var(--gold);
+            box-shadow: 0 15px 35px rgba(43, 37, 35, 0.3);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid var(--gold);
+        }
+
+        .modal-main-img {
+            grid-column: 1 / 2;
+            grid-row: 1 / 4;
+        }
+
+        .modal-sub-img-1 {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .modal-sub-img-2 {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            color: var(--espresso);
+            background: var(--card-bg);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--dusty-rose);
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        @media (max-width: 1024px) {
+            .master-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: auto;
+            }
+            .modal-content {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(2, 120px);
+            }
+            .modal-main-img {
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
+            }
+            .modal-sub-img-1 { grid-column: 2 / 3; grid-row: 1 / 2; }
+            .modal-sub-img-2 { grid-column: 1 / 2; grid-row: 2 / 3; }
+        }
+
+        @media (max-width: 600px) {
+            .master-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .header-title {
+                font-size: 1.6rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-container">
+        <a href="index.html" class="button-box">Kal's Kutting Board✂️</a>
+        <a href="behind.html" class="button-box">Behind the Kuts🎬</a>
+        <a href="deal.html" class="button-box">Kut Me a Deal🤝</a>
+        <a href="proof.html" class="button-box">The Proof is in the Stitch🪡</a>
+    </nav>
+
+    <h1 class="header-title">Kustom Kreations🎨</h1>
+    
+    <div class="instruction-banner">
+       🎨Klick to explore each style and take a kloser look at the details behind every kustom piece.🎨
+    </div>
+
+    <div class="master-grid" id="masterGrid"></div>
+
+    <div class="modal" id="imageModal">
+        <div class="modal-content" id="modalContent">
+            <button class="close-btn" id="closeBtn">&times;</button>
+        </div>
+    </div>
+
+    <script>
+        const portfolioData = {
+            1:  { cover: "kustom1_cover.jpeg", sub1: "kustom1_angle1.jpeg", sub2: "kustom1_angle2.jpeg", sub3: "kustom1_angle3.jpeg" },
+            2:  { cover: "kustom2_cover.jpeg", sub1: "kustom2_angle1.jpeg", sub2: "kustom2_angle2.jpeg", sub3: "kustom2_angle3.jpeg" },
+            3:  { cover: "kustom3_cover.jpeg", sub1: "kustom3_angle1.jpeg", sub2: "kustom3_angle2.jpeg", sub3: "kustom3_angle3.jpeg" },
+            4:  { cover: "kustom4_cover.jpeg", sub1: "kustom4_angle1.jpeg", sub2: "kustom4_angle2.jpeg", sub3: "kustom4_angle3.jpeg" },
+            5:  { cover: "kustom5_cover.jpeg", sub1: "kustom5_angle1.jpeg", sub2: "kustom5_angle2.jpeg", sub3: "kustom5_angle3.jpeg" },
+            6:  { cover: "kustom6_cover.jpeg", sub1: "kustom6_angle1.jpeg", sub2: "kustom6_angle2.jpeg", sub3: "kustom6_angle3.jpeg" },
+            7:  { cover: "kustom7_cover.jpeg", sub1: "kustom7_angle1.jpeg", sub2: "kustom7_angle2.jpeg", sub3: "kustom7_angle3.jpeg" },
+            8:  { cover: "kustom8_cover.jpeg", sub1: "kustom8_angle1.jpeg", sub2: "kustom8_angle2.jpeg", sub3: "kustom8_angle3.jpeg" },
+            9:  { cover: "kustom9_cover.jpeg", sub1: "kustom9_angle1.jpeg", sub2: "kustom9_angle2.jpeg", sub3: "kustom9_angle3.jpeg" },
+            10: { cover: "kustom10_cover.jpeg", sub1: "kustom10_angle1.jpeg", sub2: "kustom10_angle2.jpeg", sub3: "kustom10_angle3.jpeg" },
+            11: { cover: "kustom11_cover.jpeg", sub1: "kustom11_angle1.jpeg", sub2: "kustom11_angle2.jpeg", sub3: "kustom11_angle3.jpeg" },
+            12: { cover: "kustom12_cover.jpeg", sub1: "kustom12_angle1.jpeg", sub2: "kustom12_angle2.jpeg", sub3: "kustom12_angle3.jpeg" },
+            13: { cover: "kustom13_cover.jpeg", sub1: "kustom13_angle1.jpeg", sub2: "kustom13_angle2.jpeg", sub3: "kustom13_angle3.jpeg" },
+            14: { cover: "kustom14_cover.jpeg", sub1: "kustom14_angle1.jpeg", sub2: "kustom14_angle2.jpeg", sub3: "kustom14_angle3.jpeg" },
+            15: { cover: "kustom15_cover.jpeg", sub1: "kustom15_angle1.jpeg", sub2: "kustom15_angle2.jpeg", sub3: "kustom15_angle3.jpeg" },
+            16: { cover: "kustom16_cover.jpeg", sub1: "kustom16_angle1.jpeg", sub2: "kustom16_angle2.jpeg", sub3: "kustom16_angle3.jpeg" },
+            17: { cover: "kustom17_cover.jpeg", sub1: "kustom17_angle1.jpeg", sub2: "kustom17_angle2.jpeg", sub3: "kustom17_angle3.jpeg" },
+            18: { cover: "kustom18_cover.jpeg", sub1: "kustom18_angle1.jpeg", sub2: "kustom18_angle2.jpeg", sub3: "kustom18_angle3.jpeg" },
+            19: { cover: "kustom19_cover.jpeg", sub1: "kustom19_angle1.jpeg", sub2: "kustom19_angle2.jpeg", sub3: "kustom19_angle3.jpeg" },
+            20: { cover: "kustom20_cover.jpeg", sub1: "kustom20_angle1.jpeg", sub2: "kustom20_angle2.jpeg", sub3: "kustom20_angle3.jpeg" },
+            21: { cover: "kustom21_cover.jpeg", sub1: "kustom21_angle1.jpeg", sub2: "kustom21_angle2.jpeg", sub3: "kustom21_angle3.jpeg" },
+            22: { cover: "kustom22_cover.jpeg", sub1: "kustom22_angle1.jpeg", sub2: "kustom22_angle2.jpeg", sub3: "kustom22_angle3.jpeg" },
+            23: { cover: "kustom23_cover.jpeg", sub1: "kustom23_angle1.jpeg", sub2: "kustom23_angle2.jpeg", sub3: "kustom23_angle3.jpeg" },
+            24: { cover: "kustom24_cover.jpeg", sub1: "kustom24_angle1.jpeg", sub2: "kustom24_angle2.jpeg", sub3: "kustom24_angle3.jpeg" },
+            25: { cover: "kustom25_cover.jpeg", sub1: "kustom25_angle1.jpeg", sub2: "kustom25_angle2.jpeg", sub3: "kustom25_angle3.jpeg" }
+        };
+
+        const masterGrid = document.getElementById('masterGrid');
+        const modal = document.getElementById('imageModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeBtn = document.getElementById('closeBtn');
+
+        for (let i = 1; i <= 25; i++) {
+            const itemData = portfolioData[i];
+            const gridItem = document.createElement('div');
+            gridItem.classList.add('grid-item');
+
+            const previewImg = document.createElement('img');
+            previewImg.src = itemData.cover; 
+            previewImg.alt = `Kustom Piece ${i}`;
+            previewImg.className = 'grid-preview-img';
+            previewImg.onerror = () => { previewImg.src = 'tools.jpeg'; }; 
+            gridItem.appendChild(previewImg);
+
+            const badge = document.createElement('div');
+            badge.className = 'badge-count';
+            badge.textContent = '4 🎨';
+            gridItem.appendChild(badge);
+
+            gridItem.addEventListener('click', () => {
+                modalContent.innerHTML = '';
+                modalContent.appendChild(closeBtn);
+
+                const img1 = document.createElement('img');
+                img1.src = itemData.cover;
+                img1.className = 'modal-main-img';
+                img1.onerror = () => { img1.src = 'tools.jpeg'; };
+
+                const img2 = document.createElement('img');
+                img2.src = itemData.sub1;
+                img2.className = 'modal-sub-img-1';
+                img2.onerror = () => { img2.src = 'tools.jpeg'; };
+
+                const img3 = document.createElement('img');
+                img3.src = itemData.sub2;
+                img3.className = 'modal-sub-img-2';
+                img3.onerror = () => { img3.src = 'tools.jpeg'; };
+
+                const img4 = document.createElement('img');
+                img4.src = itemData.sub3;
+                img4.style.gridColumn = "2 / 3";
+                img4.style.gridRow = "3 / 4";
+                img4.onerror = () => { img4.src = 'tools.jpeg'; };
+
+                modalContent.appendChild(img1);
+                modalContent.appendChild(img2);
+                modalContent.appendChild(img3);
+                modalContent.appendChild(img4);
+
+                modal.classList.add('active');
+            });
+
+            masterGrid.appendChild(gridItem);
+        }
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
