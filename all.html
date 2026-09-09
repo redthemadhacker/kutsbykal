@@ -6,6 +6,7 @@
     <link rel="shortcut icon" type="image/jpeg" href="kal.jpeg">
     <title>Kustom Kollection✨</title>
     <style>
+
         :root {
             --bg-cream: #f4ece1;
             --espresso: #1e1816;
@@ -285,6 +286,7 @@
                 padding: 20px 15px;
             }
         }
+        
     </style>
 </head>
 <body>
@@ -302,11 +304,11 @@
     </div>
 
     <div class="category-filter-container">
-        <button class="filter-btn active" onclick="filterGallery('all')">Show All Hub (100)</button>
-        <button class="filter-btn" onclick="filterGallery('kustom')">Kustom Kreations 🎨</button>
-        <button class="filter-btn" onclick="filterGallery('tailors')">Tailors 📐</button>
-        <button class="filter-btn" onclick="filterGallery('alterations')">Alterations 🪡</button>
-        <button class="filter-btn" onclick="filterGallery('upcycling')">Kustom Rekuts ♻️</button>
+        <button class="filter-btn active" onclick="filterGallery('all')">Show Full Kollecton✨</button>
+        <button class="filter-btn" onclick="filterGallery('kustom')">Kustom Kreations🎨</button>
+        <button class="filter-btn" onclick="filterGallery('tailors')">Tailors📐</button>
+        <button class="filter-btn" onclick="filterGallery('alterations')">Alterations🪡</button>
+        <button class="filter-btn" onclick="filterGallery('upcycling')">Kustom Rekuts♻️</button>
     </div>
 
     <div class="master-grid" id="masterGrid"></div>
@@ -320,7 +322,7 @@
     <script>
         const allHubData = {
             kustom: {
-                badge: '4 🎨',
+                badge: '🎨',
                 items: {
                     1:  { cover: "kustom1_cover.jpeg", sub1: "kustom1_angle1.jpeg", sub2: "kustom1_angle2.jpeg", sub3: "kustom1_angle3.jpeg" },
                     2:  { cover: "kustom2_cover.jpeg", sub1: "kustom2_angle1.jpeg", sub2: "kustom2_angle2.jpeg", sub3: "kustom2_angle3.jpeg" },
@@ -350,7 +352,7 @@
                 }
             },
             tailors: {
-                badge: '4 📐',
+                badge: '📐',
                 items: {
                     1:  { cover: "tailors1_cover.jpeg", sub1: "tailors1_angle1.jpeg", sub2: "tailors1_angle2.jpeg", sub3: "tailors1_angle3.jpeg" },
                     2:  { cover: "tailors2_cover.jpeg", sub1: "tailors2_angle1.jpeg", sub2: "tailors2_angle2.jpeg", sub3: "tailors2_angle3.jpeg" },
@@ -380,7 +382,7 @@
                 }
             },
             alterations: {
-                badge: '4 🪡',
+                badge: '🪡',
                 items: {
                     1:  { cover: "alterations1_cover.jpeg", sub1: "alterations1_angle1.jpeg", sub2: "alterations1_angle2.jpeg", sub3: "alterations1_angle3.jpeg" },
                     2:  { cover: "alterations2_cover.jpeg", sub1: "alterations2_angle1.jpeg", sub2: "alterations2_angle2.jpeg", sub3: "alterations2_angle3.jpeg" },
@@ -410,7 +412,7 @@
                 }
             },
             upcycling: {
-                badge: '4 ♻️',
+                badge: '♻️',
                 items: {
                     1:  { cover: "upcycling1_cover.jpeg", sub1: "upcycling1_angle1.jpeg", sub2: "upcycling1_angle2.jpeg", sub3: "upcycling1_angle3.jpeg" },
                     2:  { cover: "upcycling2_cover.jpeg", sub1: "upcycling2_angle1.jpeg", sub2: "upcycling2_angle2.jpeg", sub3: "upcycling2_angle3.jpeg" },
@@ -526,6 +528,7 @@
         });
 
         renderGrid('all');
+        
     </script>
 
 </body>
